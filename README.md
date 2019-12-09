@@ -1,6 +1,10 @@
 
 Pretty sure this is the real deal :)
 
+Run squad colab 
+
+https://colab.research.google.com/drive/1GPiAg91j2s0S6CCGm7QHMDL2zcFn8UyI#scrollTo=VfkOZFPXq3Jy
+
 
 
 ## Introduction
