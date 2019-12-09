@@ -1155,6 +1155,7 @@ def main(_):
     tf.gfile.MakeDirs(FLAGS.output_dir)
 
   if FLAGS.do_prepro:
+    tf.logging.info("doing pre_processing")
     preprocess()
     return
 
