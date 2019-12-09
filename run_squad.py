@@ -1209,7 +1209,9 @@ def main(_):
     estimator.train(input_fn=train_input_fn, max_steps=FLAGS.train_steps)
 
   if FLAGS.do_predict:
+    print("Do prediction configured!")
     eval_examples = read_squad_examples(FLAGS.predict_file, is_training=False)
+    
 
     with tf.gfile.Open(FLAGS.predict_file) as f:
       orig_data = json.load(f)["data"]
@@ -1222,6 +1224,9 @@ def main(_):
         FLAGS.output_dir,
         "{}.slen-{}.qlen-{}.eval.features.pkl".format(
             spm_basename, FLAGS.max_seq_length, FLAGS.max_query_length))
+
+    print("eval file")
+    print(eval_rec_file)
 
     if tf.gfile.Exists(eval_rec_file) and tf.gfile.Exists(
         eval_feature_file) and not FLAGS.overwrite_data:
@@ -1236,6 +1241,7 @@ def main(_):
         eval_features.append(feature)
         eval_writer.process_feature(feature)
 
+      print("about to run convert_examples_to_features")   
       convert_examples_to_features(
           examples=eval_examples,
           sp_model=sp_model,
@@ -1248,6 +1254,8 @@ def main(_):
 
       with tf.gfile.Open(eval_feature_file, 'wb') as fout:
         pickle.dump(eval_features, fout)
+
+    print("about to run input_fn_builder")   
 
     eval_input_fn = input_fn_builder(
         input_glob=eval_rec_file,
